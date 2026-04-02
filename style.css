@@ -1,0 +1,44 @@
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: #333;
+}
+
+nav li {
+  padding: 15px 20px;
+  margin: 0 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #4b0166;
+}
+
+
+.fixed-element {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #6e6c6c;
+  z-index: 1000;
+}
+
+
+main {
+  margin-top: 100px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
+  border: 1px solid #4b0166;
+}
