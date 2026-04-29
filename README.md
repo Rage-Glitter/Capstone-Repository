@@ -91,3 +91,6 @@ WILL BE SUBMITTED BEFORE CLASS STARTS MON 4/6
 
 ##### Create and provide link to SWOT Analysis
 " " " "
+
+
+NOTE: If you want to add another model, like a user model, for sign in or whatever, you could basically copy BirthInfo.js, and the main thing you would change is the parts that say "BirthInfo" to whatever makes sense for what you're doing. You'd create a new controller. Basically copy the files in the models and controllers folders and update the original names from birthInfos and BirthInfo to the new name. Don't forget to export default router at the bottom, and in the app.js file, which in the server folder, add an app.use statement to add the new router you just made in your controllers file.

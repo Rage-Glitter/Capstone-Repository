@@ -1,4 +1,4 @@
 export default {
-  header: "transits",
-  view: "transits"
+  header: "Current Transits",
+  view: "transit"
 };
