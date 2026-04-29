@@ -55,10 +55,11 @@ router.put("/:id", async (request, response) => {
       request.params.id,
 
       {
+        // if you update stuff in BirthInfo.js, update it here too
         $set: {
-          // if you update stuff in BirthInfo.js, update it here too
           name: body.name,
-          date: body.date,
+          birthDate: body.birthDate,
+          birthTime: body.birthTime,
           location: body.location
         }
       },
