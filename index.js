@@ -29,10 +29,21 @@ router.hooks({
       // New Case for the Home View
       case "birthchart":
         const authString = btoa(`${process.env.ASTRONOMY_APP_ID}:${process.env.ASTRONOMY_APP_SECRET}`);
-        axios.get(
-          "https://api.astronomyapi.com/api/v2/bodies/positions", {headers:{Authorization: authString,withCredentials:true}}
-        ).then(response => store.birthchart.positions=response.data)
-        done()
+         axios
+      .get(
+        "https://api.astronomyapi.com/api/v2/bodies/positions?longitude=-84.39733&latitude=33.775867&elevation=1&from_date=2026-04-30&to_date=2026-04-30&time=19%3A53%3A01",
+        {
+          headers: { Authorization: `Basic ${authString}` }
+        }
+      ).then(response => {
+        console.log(response.data);
+        store.birthchart.positions=response.data;
+        done();
+      }).catch(err => {
+            console.log(err);
+            done();
+          });
+        break;
       case "home":
         axios
           // Get request to retrieve the current weather data using the API key and providing a city name
