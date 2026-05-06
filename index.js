@@ -27,23 +27,7 @@ router.hooks({
     switch (view) {
       // Add a case for each view that needs data from an API
       // New Case for the Home View
-      case "birthchart":
-        const authString = btoa(`${process.env.ASTRONOMY_APP_ID}:${process.env.ASTRONOMY_APP_SECRET}`);
-         axios
-      .get(
-        "https://api.astronomyapi.com/api/v2/bodies/positions?longitude=-84.39733&latitude=33.775867&elevation=1&from_date=2026-04-30&to_date=2026-04-30&time=19%3A53%3A01",
-        {
-          headers: { Authorization: `Basic ${authString}` }
-        }
-      ).then(response => {
-        console.log(response.data);
-        store.birthchart.positions=response.data;
-        done();
-      }).catch(err => {
-            console.log(err);
-            done();
-          });
-        break;
+
       case "home":
         axios
           // Get request to retrieve the current weather data using the API key and providing a city name
@@ -87,52 +71,53 @@ router.hooks({
       document.querySelector("nav > ul").classList.toggle("hidden--mobile");
     });
 
-    // if (view === "order") {
-    //   // Add an event handler for the submit button on the form
-    //   document.querySelector("form").addEventListener("submit", event => {
-    //     event.preventDefault();
+    if (view === "birthchart") {
+      // Add an event handler for the submit button on the form
+      document.querySelector("form").addEventListener("submit", event => {
+        event.preventDefault();
 
-    //     // Get the form element
-    //     const inputList = event.target.elements;
-    //     // console.log("Input Element List", inputList);
+        // Get the form element (getting the info from the form)
+        const inputList = event.target.elements;
+        // console.log("Input Element List", inputList);
 
-    //     // Create an empty array to hold the toppings
-    //     const toppings = [];
+        // Create a request body object to send to the API (this cuts out having to repeat the above section for each section below)(the following are keys followed by the values. key value pairs. )
+        const requestData = {
+          name: inputList.name.value,
+          day: inputList.day.value,
+          month: inputList.month.value,
+          year: inputList.year.value,
+          hour: inputList.hour.value,
+          minute: inputList.minute.value,
+          location: inputList.location.value
+        };
+        // Log the request body to the console
+        console.log("request Body", requestData);
 
-    //     // Iterate over the toppings array
+        let date = `${requestData.year}-${requestData.month}-${requestData.day}`;
+        let time = `${requestData.hour}:${requestData.minute}:00`;
+        let lng = "-84.39733";
+        let lat = "33.775867";
+        let elevation = "1";
 
-    //     for (let input of inputList.toppings) {
-    //       // If the value of the checked attribute is true then add the value to the toppings array
-    //       if (input.checked) {
-    //         toppings.push(input.value);
-    //       }
-    //     }
 
-    //     // Create a request body object to send to the API
-    //     const requestData = {
-    //       customer: inputList.customer.value,
-    //       crust: inputList.crust.value,
-    //       cheese: inputList.cheese.value,
-    //       sauce: inputList.sauce.value,
-    //       toppings: toppings
-    //     };
-    //     // Log the request body to the console
-    //     console.log("request Body", requestData);
+        const authString = btoa(`${process.env.ASTRONOMY_APP_ID}:${process.env.ASTRONOMY_APP_SECRET}`);
+         axios
+      .get(
+        `https://api.astronomyapi.com/api/v2/bodies/positions?longitude=${lng}&latitude=${lat}&elevation=${elevation}&from_date=${date}&to_date=${date}&time=${time}`,
+        {
+          headers: { Authorization: `Basic ${authString}` }
+        }
+      ).then(response => {
+        console.log(response.data);
+        store.birthchart.positions=response.data;
 
-    //     axios
-    //       // Make a POST request to the API to create a new pizza
-    //       .post(`${process.env.PIZZA_PLACE_API_URL}/pizzas`, requestData)
-    //       .then(response => {
-    //         //  Then push the new pizza onto the Pizza state pizzas attribute, so it can be displayed in the pizza list
-    //         store.pizza.pizzas.push(response.data);
-    //         router.navigate("/pizza");
-    //       })
-    //       // If there is an error log it to the console
-    //       .catch(error => {
-    //         console.log("It puked", error);
-    //       });
-    //   });
-    // }
+      }).catch(err => {
+            console.log(err);
+
+          });
+
+      });
+    }
   }
 });
 
