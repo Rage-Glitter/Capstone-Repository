@@ -1,9 +1,10 @@
 import html from "html-literal";
 
 export default state => html`
+ ${state.positions}
   <section id="birthchart">
     <h2>birthchart page goes here</h2>
-    ${state.positions}
+
     <!-- All of these inputs and the button goes inside of a FORM (order.js from class spa has one I can adapt for this) -->
     <form
       id="order"

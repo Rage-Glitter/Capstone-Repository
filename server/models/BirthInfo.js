@@ -2,8 +2,11 @@ import mongoose from "mongoose";
 
 const birthInfoSchema = new mongoose.Schema({
   name: String,
-  birthDate: String,
-  birthTime: String,
+  day: String,
+  month: String,
+  year: String,
+  hour: String,
+  minute: String,
   location: String,
   createdAt: {
     type: Date,

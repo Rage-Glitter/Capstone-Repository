@@ -99,7 +99,46 @@ router.hooks({
         let lat = "33.775867";
         let elevation = "1";
 
+switch (requestData.location) {
+          case "san francisco":
+            lat = 37.7749;
+            lng = -122.4194;
+            elevation = 16; // meters
+            break;
 
+          case "dallas":
+            lat = 32.7831;
+            lng = -96.8067;
+            elevation = 128;
+            break;
+
+          case "chicago":
+            lat = 41.8781;
+            lng = -87.6298;
+            elevation = 181;
+            break;
+
+          case "seattle":
+            lat = 47.6062;
+            lng = -122.3321;
+            elevation = 56;
+            break;
+
+          case "miami":
+            lat = 25.7617;
+            lng = -80.1918;
+            elevation = 2;
+            break;
+
+          default:
+            console.log(
+              "City not recognized, using default location St. Louis"
+            );
+            lat = "38.6273";
+            lng = "-90.1979";
+            elevation = "142";
+        }
+        console.log(lat);
         const authString = btoa(`${process.env.ASTRONOMY_APP_ID}:${process.env.ASTRONOMY_APP_SECRET}`);
          axios
       .get(
@@ -109,8 +148,15 @@ router.hooks({
         }
       ).then(response => {
         console.log(response.data);
-        store.birthchart.positions=response.data;
-
+const constellations = response.data.data.table.rows.map(row => {
+    return {
+        planet : row.cells[0].name,
+        constellation : row.cells[0].position.constellation.name
+    }
+})
+        store.birthchart.positions=constellations
+        console.log(constellations);
+        router.navigate("/birthchart");
       }).catch(err => {
             console.log(err);
 
