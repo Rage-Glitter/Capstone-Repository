@@ -3,7 +3,7 @@ import html from "html-literal";
 export default state => html`
  ${state.positions}
   <section id="birthchart">
-    <h2>birthchart page goes here</h2>
+    <h2>Enter a name, date, location, and time to see which constellation the planets were in if looking at the real sky from that location, on that date, at that time.</h2>
 
     <!-- All of these inputs and the button goes inside of a FORM (order.js from class spa has one I can adapt for this) -->
     <form

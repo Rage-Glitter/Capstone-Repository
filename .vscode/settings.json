@@ -15,7 +15,7 @@
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "stylelint.enable": true,
-  "workbench.colorTheme": "Dracula Theme",
+  "workbench.colorTheme": "PowerShell ISE",
   "workbench.enableExperiments": false,
   "workbench.iconTheme": "material-icon-theme",
   "workbench.view.alwaysShowHeaderActions": true,

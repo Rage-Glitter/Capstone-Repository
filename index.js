@@ -4,6 +4,7 @@ import * as views from "./views";
 import Navigo from "navigo";
 import { camelCase } from "lodash";
 import axios from "axios";
+import './style.css';
 
 const router = new Navigo("/");
 
@@ -140,7 +141,7 @@ switch (requestData.location) {
         }
         console.log(lat);
         const authString = btoa(`${process.env.ASTRONOMY_APP_ID}:${process.env.ASTRONOMY_APP_SECRET}`);
-         axios
+        axios
       .get(
         `https://api.astronomyapi.com/api/v2/bodies/positions?longitude=${lng}&latitude=${lat}&elevation=${elevation}&from_date=${date}&to_date=${date}&time=${time}`,
         {
