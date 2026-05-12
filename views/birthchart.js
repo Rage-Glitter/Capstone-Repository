@@ -1,7 +1,7 @@
 import html from "html-literal";
 
 export default state => html`
- ${state.positions}
+ ${state.positions[0]}
   <section id="birthchart">
     <h2>Enter a name, date, location, and time to see which constellation the planets were in if looking at the real sky from that location, on that date, at that time.</h2>
 

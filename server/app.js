@@ -20,7 +20,7 @@ const logging = (request, response, next) => {
 
 app.use(cors()); //cross origin scripting - helps in terms of how our data is being sent and transmitted.
 app.use(express.json()); //javascript object notation, helps decode some of the script
-// app.use(logging);
+app.use(logging);
 
 mongoose.connect(process.env.MONGODB);
 const db = mongoose.connection;
@@ -29,8 +29,6 @@ db.once(
   "open",
   console.log.bind(console, "Successfully opened connection to Mongo!")
 );
-
-app.use("/birthInfo", birthInfos);
 
 // Handle the request with HTTP GET method from http://localhost:3000/
 app.get("/", (request, response) => {
@@ -77,7 +75,7 @@ app.get("/echo/:text", (request, response) => {
   }
   response.status(418).send(`You told me to echo ${output}`);
 });
-
+app.use("/birthInfo", birthInfos);
 // Tell the Express app to start listening
 // Let the humans know I am running and listening on 3000
 const server = app.listen(PORT, () =>
