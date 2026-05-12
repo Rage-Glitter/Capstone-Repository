@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import birthInfos from "./controllers/birthInfos.js";
+import axios from "axios";
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -29,11 +30,26 @@ db.once(
   console.log.bind(console, "Successfully opened connection to Mongo!")
 );
 
-app.use("/birthInfo", birthInfos);
-
 // Handle the request with HTTP GET method from http://localhost:3000/
 app.get("/", (request, response) => {
-  response.send("Welcome to my capstoned!");
+  response.send("Welcome to my capstone!");
+});
+app.get("/positions", (request, response) => {
+  const authString = btoa(
+    `${process.env.ASTRONOMY_APP_ID}:${process.env.ASTRONOMY_APP_SECRET}`
+  );
+  try {
+    axios
+      .get(
+        "https://api.astronomyapi.com/api/v2/bodies/positions?longitude=-84.39733&latitude=33.775867&elevation=1&from_date=2026-04-30&to_date=2026-04-30&time=19%3A53%3A01",
+        {
+          headers: { Authorization: `Basic ${authString}` }
+        }
+      )
+      .then(res => response.send(res.data));
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 // Handle the request with HTTP GET method from http://localhost:3000/status
@@ -59,7 +75,7 @@ app.get("/echo/:text", (request, response) => {
   }
   response.status(418).send(`You told me to echo ${output}`);
 });
-
+app.use("/birthInfo", birthInfos);
 // Tell the Express app to start listening
 // Let the humans know I am running and listening on 3000
 const server = app.listen(PORT, () =>
