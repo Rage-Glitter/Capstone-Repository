@@ -150,7 +150,6 @@ switch (requestData.location) {
       ).then(response => {
         console.log(response.data);
 const constellations = response.data.data.table.rows.map(row => {
-  console.log()
     return {
         planet : row.cells[0].name,
         constellation : row.cells[0].position.constellation.name
@@ -158,6 +157,7 @@ const constellations = response.data.data.table.rows.map(row => {
 })
         store.birthchart.positions=constellations
         console.log(constellations);
+        console.log(store.birthchart.positions);
         router.navigate("/birthchart");
       }).catch(err => {
             console.log(err);

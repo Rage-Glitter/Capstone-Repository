@@ -1,6 +1,27 @@
-body{
-  background-color: #333;
-  color: #f79400;
+:root {
+  /* Color Palette */
+  --bg-dark: #333;
+  --bg-header: #3d3d3d;
+  --nav-bg: #d4d3d3;
+  --content-align: center;
+
+  /* Accent Colors */
+  --accent-orange: #f79400;
+  --accent-gold: rgb(255, 176, 7);
+  --accent-purple: #520298;
+  --accent-purple-dark: #4b0166;
+  --hover-green: #09ff05;
+  --shadow-color: #3e3e3e;
+
+  /* Spacing & Layout */
+  --main-width: 900px;
+  --gap-standard: 30px;
+  --nav-padding: 15px 20px;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--accent-orange);
   margin: 0;
   font-family: sans-serif;
 }
@@ -11,119 +32,68 @@ nav ul {
   padding: 10px;
   display: flex;
   justify-content: center;
-  background-color: #d4d3d3;
+  background-color: var(--nav-bg);
 }
 
 nav li {
-  padding: 15px 20px;
+  padding: var(--nav-padding);
   margin: 0 20px;
 }
 
 nav a {
-  color: rgb(255, 176, 7);
+  color: var(--accent-gold);
   text-decoration: none;
   font-weight: bold;
 }
 
 nav a:hover {
-  color: #09ff05;
+  color: var(--hover-green);
 }
-
 
 .fixed-element {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #3d3d3d;
+  background-color: var(--bg-header);
   z-index: 1000;
 }
 
-
 main {
   margin-top: 100px;
-  max-width: 900px;
+  max-width: var(--main-width);
   margin-left: auto;
   margin-right: auto;
-  padding: 30px;
-  border: 1px solid #4b0166;
+  padding: var(--gap-standard);
+  border: 1px solid var(--accent-purple-dark);
+  text-align: var(--content-align);
 }
 
-footer {
-  padding: 30px;
+footer, header {
+  padding: var(--gap-standard);
 }
 
-header {
-  padding: 30px;
-}
-
-
-@media (max-width: 768px) {
-  .navigation {
-    display: none;
-  }
-
-  .toggle-btn {
-    display: block;
-    cursor: pointer;
-  }
-
-  .toggle-btn .bar {
-    background-color: #000;
-    height: 3px;
-    margin-bottom: 6px;
-    transition: background-color 0.3s ease;
-  }
-
-  .toggle-btn:hover .bar {
-    background-color: #aaa;
-}
-
-  #toggle:checked ~ .navigation {
-    display: block;
-  }
-}
-
-
-.shadow-pop-tr:hover {
-	-webkit-animation: shadow-pop-tr 0.3s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
-animation: shadow-pop-tr 0.3s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
-}
-
+/* Updated Shadow-Pop with Variables */
 .shadow-pop-tr {
-
   display: inline-block;
-
-  padding: 15px 25px;
-
-
+  padding: var(--nav-padding);
   margin: 10px;
-
-  background-color: #520298;
+  background-color: var(--accent-purple);
   border-radius: 8px;
 }
 
-@-webkit-keyframes shadow-pop-tr {
-  0% {
-    -webkit-box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
-            box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
-    -webkit-transform: translateX(0) translateY(0);
-            transform: translateX(0) translateY(0);
-  }
-  100% {
-    -webkit-box-shadow: 1px -1px #3e3e3e, 2px -2px #3e3e3e, 3px -3px #3e3e3e, 4px -4px #3e3e3e, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
-            box-shadow: 1px -1px #3e3e3e, 2px -2px #3e3e3e, 3px -3px #3e3e3e, 4px -4px #3e3e3e, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
-    -webkit-transform: translateX(-8px) translateY(8px);
-            transform: translateX(-8px) translateY(8px);
-  }
+.shadow-pop-tr:hover {
+  animation: shadow-pop-tr 0.3s cubic-bezier(0.470, 0.000, 0.745, 0.715) both;
 }
+
 @keyframes shadow-pop-tr {
   0% {
-    box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
+    box-shadow: 0 0 var(--shadow-color);
     transform: translateX(0) translateY(0);
   }
   100% {
-    box-shadow: 1px -1px #3e3e3e, 2px -2px #3e3e3e, 3px -3px #3e3e3e, 4px -4px #3e3e3e, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
+    /* You can even use variables inside complex properties! */
+    box-shadow: 1px -1px var(--shadow-color), 2px -2px var(--shadow-color), 3px -3px var(--shadow-color), 4px -4px var(--shadow-color);
     transform: translateX(-8px) translateY(8px);
   }
 }
