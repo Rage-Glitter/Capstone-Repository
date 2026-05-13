@@ -156,8 +156,10 @@ const constellations = response.data.data.table.rows.map(row => {
     }
 })
         store.birthchart.positions=constellations
-        console.log(constellations);
-        console.log(store.birthchart.positions);
+          requestData.constellations = constellations
+
+        axios.post(`http://localhost:3000/birthInfo`, requestData)
+        .then(response => console.log(response.data))
         router.navigate("/birthchart");
       }).catch(err => {
             console.log(err);
